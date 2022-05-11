@@ -1,12 +1,6 @@
 import os
 from time import sleep
 clear = lambda:  os.system('cls')
-# rental_income
-
-#ri_ex: 2,000 (/m)
-# expenses
-# cashflow = income - expenses
-
 class Property:
     def __init__(self):
         self.expenses = Expenses()
@@ -21,17 +15,11 @@ class Property:
         self.cash_flow = { "monthly": 0, "annual": 0}
         self.cash_on_cash_roi = 0
     
-    def get_attributes(self, obj):
+    def input_attributes(self, obj):
         clear()
         print(f"Enter {obj.__class__.__name__} Details".center(30, "-"))
         for attr in vars(obj):
             setattr(obj,attr, float(input(f'{attr.replace("_", " ").title()}: $'))) 
-            
-    def get_expenses(self):
-        self.get_attributes(self.expenses)
-    
-    def get_income(self):
-        self.get_attributes(self.income)
         
     def get_total(self, obj):
         return sum([getattr(obj, attr) for attr in vars(obj)])
@@ -90,9 +78,9 @@ class Investment:
     
 def run():
     property = Property()
-    property.get_attributes(property.income)
-    property.get_attributes(property.expenses)
-    property.get_attributes(property.investment)
+    property.input_attributes(property.income)
+    property.input_attributes(property.expenses)
+    property.input_attributes(property.investment)
     property.calc_all()
     clear()
     property.display_monthly_totals()
